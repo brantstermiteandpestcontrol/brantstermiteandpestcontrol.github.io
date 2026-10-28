@@ -54,6 +54,11 @@ jobs:
           SITE=$(node -p "require('./src/_data/site.json').url")
           KEY=$(node -p "require('./src/_data/site.json').indexNowKey")
           HOST=$(node -p "new URL('$SITE').host")
+          # Skip quietly until the custom domain points at this site (the key file must be reachable there).
+          if [ "$(curl -fsSL "$SITE/$KEY.txt" 2>/dev/null | tr -d '[:space:]')" != "$KEY" ]; then
+            echo "::notice::$SITE isn't serving this site yet — skipping IndexNow."
+            exit 0
+          fi
           URLS=$(curl -fsSL "$SITE/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>console.log(JSON.stringify(d.trim().split("\n"))))')
           curl -fsS -X POST "https://api.indexnow.org/indexnow" -H "Content-Type: application/json; charset=utf-8" \
             -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"$SITE/$KEY.txt\",\"urlList\":$URLS}" \
