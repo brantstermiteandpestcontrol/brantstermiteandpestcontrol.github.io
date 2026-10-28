@@ -1,0 +1,42 @@
+{
+  "name": "Brant's Termite & Pest Control",
+  "legalName": "Brant's Termite & Pest Control, LLC",
+  "tagline": "Targeting Pests. Defending Your Property.",
+  "owner": "Tyler Brant",
+  "ownerTitle": "Owner / Operator",
+  "phone": "660-909-7284",
+  "email": "",
+  "url": "https://www.brantstermiteandpest.com",
+  "region": "Central Missouri",
+  "address": {
+    "street": "25 SW 675th Rd",
+    "city": "Warrensburg",
+    "state": "MO",
+    "zip": "64093"
+  },
+  "showAddress": true,
+  "hours": [
+    {
+      "days": "Monday – Friday",
+      "time": "8:00 AM – 5:00 PM"
+    },
+    {
+      "days": "Saturday – Sunday",
+      "time": "Closed"
+    }
+  ],
+  "openingHours": "Mo-Fr 08:00-17:00",
+  "badges": [
+    "Licensed & Insured",
+    "Locally Owned & Operated",
+    "Residential & Commercial"
+  ],
+  "googleProfileUrl": "",
+  "googleReviewUrl": "",
+  "facebookUrl": "",
+  "quoteForm": {
+    "web3formsKey": "",
+    "subject": "New quote request — brantstermiteandpest.com"
+  },
+  "indexNowKey": "70e5c70bc748f2816100d8fde48b38dc"
+}

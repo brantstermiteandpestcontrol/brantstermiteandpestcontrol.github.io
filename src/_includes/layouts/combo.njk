@@ -1,0 +1,92 @@
+---
+layout: layouts/base.njk
+---
+{% from "partials/icons.njk" import icon %}
+{%- set s = combo.service -%}
+{%- set a = combo.area -%}
+{%- set sName = s.shortTitle or s.title -%}
+{%- set heroTitle = title -%}
+{%- set heroIntro = (s.cityIntro or s.intro) | fillCity(a.name) -%}
+{%- set heroEyebrow = (a.county ~ " · " if a.county else "") ~ "Residential & Commercial" -%}
+{%- set heroIcon = s.icon -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container content-grid">
+    <div class="prose">
+      <h2>{{ sName }} for {{ a.name }} Homes &amp; Businesses</h2>
+      <p>{{ a.intro }}</p>
+      {%- if s.cityBody %}<p>{{ s.cityBody | fillCity(a.name) }}</p>{% endif %}
+
+      {%- if s.includes and s.includes.length %}
+      <div class="feature-block feature-block--boxed">
+        <h2>Our {{ sName }} Services in {{ a.name }}</h2>
+        <ul class="checklist checklist--cols">
+          {%- for item in s.includes %}<li>{{ icon("check") }}{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+
+      {%- if s.signs and s.signs.length %}
+      <div class="feature-block feature-block--signs">
+        <h2>{{ s.signsTitle or "Warning Signs to Watch For" }}</h2>
+        <ul class="signs">
+          {%- for sign in s.signs %}<li>{{ icon(s.icon) }}<span>{{ sign }}</span></li>{% endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+
+      <h2>Residential &amp; Commercial {{ sName }} in {{ a.name }}</h2>
+      <p>We provide {{ sName | lower }} for homes, apartments, restaurants, offices, warehouses, and commercial properties throughout {{ a.name }}{% if a.county %} and {{ a.county }}{% endif %}.</p>
+
+      <h2>Why Choose Us in {{ a.name }}</h2>
+      <ul class="checklist checklist--cols">
+        {%- for t in ["Local & trusted", "Licensed & insured", "Fast response", "Affordable solutions", "Proven treatments", "Owner-operated service"] %}<li>{{ icon("check") }}{{ t }}</li>{% endfor %}
+      </ul>
+
+      <p class="callout">If you need {{ sName | lower }} in {{ a.name }}, MO, call <a href="{{ site.phone | telHref }}"><strong>{{ site.phone }}</strong></a> today. Want the details first? Read more about our <a href="{{ combo.serviceUrl }}">{{ s.title | lower }}</a> or all of our <a href="{{ combo.areaUrl }}">pest control services in {{ a.name }}</a>.</p>
+    </div>
+    {%- set callCardTitle = sName ~ " in " ~ a.name %}
+    {% include "partials/call-card.njk" %}
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container">
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container link-columns">
+    <div>
+      <h2 class="link-columns__title">More Pest Control in {{ a.name }}</h2>
+      <ul class="mini-services mini-services--stack">
+        {%- for c in collections.combos | comboFor({ area: combo.areaSlug }) %}{% if c.serviceSlug != combo.serviceSlug %}
+        <li><a href="{{ c.url }}">{{ icon(c.service.icon) }}<span>{{ c.service.shortTitle or c.service.title }} in {{ a.name }}</span></a></li>
+        {%- endif %}{% endfor %}
+        <li><a href="{{ combo.areaUrl }}">{{ icon("pin") }}<span>All pest control services in {{ a.name }}</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="link-columns__title">{{ sName }} in Other Cities</h2>
+      <ul class="mini-services mini-services--stack">
+        {%- for c in collections.combos | comboFor({ service: combo.serviceSlug }) %}{% if c.areaSlug != combo.areaSlug %}
+        <li><a href="{{ c.url }}">{{ icon("pin") }}<span>{{ sName }} in {{ c.area.name }}, MO</span></a></li>
+        {%- endif %}{% endfor %}
+        <li><a href="{{ combo.serviceUrl }}">{{ icon(s.icon) }}<span>{{ s.title }} — all areas</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container container--narrow">
+    {%- set faqTitle = sName ~ " in " ~ a.name ~ ": FAQs" %}
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+
+{%- set ctaTitle = "Need " ~ sName ~ " in " ~ a.name ~ "?" %}
+{%- set ctaText = "Call today for fast, professional service from a local, owner-operated company." %}
+{% include "partials/cta-band.njk" %}

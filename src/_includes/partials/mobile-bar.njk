@@ -1,0 +1,5 @@
+{% from "partials/icons.njk" import icon %}
+<div class="mobile-bar" aria-label="Quick contact">
+  <a class="btn btn--gold" href="{{ site.phone | telHref }}">{{ icon("phone") }} Call Now</a>
+  <a class="btn btn--blue" href="/contact/">Free Quote</a>
+</div>

@@ -1,0 +1,105 @@
+---
+layout: layouts/base.njk
+---
+{% from "partials/icons.njk" import icon %}
+{%- set slug = page.fileSlug -%}
+{%- set heroTitle = title -%}
+{%- set heroIntro = intro -%}
+{%- set heroEyebrow = (county ~ " · " if county else "") ~ "Residential & Commercial" -%}
+{%- set cityCombos = collections.combos | comboFor({ area: slug }) -%}
+{%- set miles = name | milesFromHq(collections.areas) -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container content-grid">
+    <div class="prose">
+      <h2>Local Pest Control in {{ name }}, Missouri</h2>
+      <p>{{ site.name }} proudly provides professional pest control services in {{ name }}, Missouri. We offer reliable solutions for residential and commercial properties, helping protect {{ name }} homes and businesses from unwanted pests.</p>
+      <p>Whether you're dealing with termites, ants, cockroaches, bed bugs, mosquitoes, or wildlife, we deliver effective treatments designed to eliminate pests and keep them from coming back.</p>
+
+      {{ content | safe }}
+
+      <div class="feature-block feature-block--boxed">
+        <h2>Our Services in {{ name }} Include</h2>
+        <ul class="checklist checklist--cols">
+          {%- for s in collections.services %}
+          {%- set href = collections.combos | comboUrl(slug, s.fileSlug) %}
+          <li>{{ icon("check") }}<a href="{{ href or s.url }}">{{ s.data.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+
+      <h2>Residential &amp; Commercial Pest Control in {{ name }}</h2>
+      <p>We provide pest control services in {{ name }} for homes, apartment complexes, restaurants, offices, warehouses, and municipal properties — with one-time treatments, ongoing maintenance plans, and flexible scheduling.</p>
+      <ul class="checklist checklist--cols">
+        {%- for t in ["Homes & rentals", "Apartment complexes", "Restaurants", "Offices", "Warehouses", "City & municipal properties"] %}<li>{{ icon("check") }}{{ t }}</li>{% endfor %}
+      </ul>
+
+      <h2>Common Pest Problems in {{ name }}</h2>
+      <p>{{ pestNotes or ("Many homes and businesses in " ~ name ~ " deal with recurring pest issues because of seasonal changes, moisture, and the surrounding landscape. Without proper treatment, pests can quickly return and create ongoing problems — which is why we focus on long-term prevention, not just a quick spray.") }}</p>
+    </div>
+
+    <div class="aside-stack">
+      {%- set callCardTitle = "Pest control in " ~ name %}
+      {% include "partials/call-card.njk" %}
+      <dl class="fact-card">
+        {%- if county %}<div><dt>County</dt><dd>{{ county }}</dd></div>{% endif %}
+        {%- if miles %}<div><dt>From our {{ site.address.city }} base</dt><dd>About {{ miles }} miles</dd></div>{% endif %}
+        <div><dt>Hours</dt><dd>{% for h in site.hours %}{{ h.days }}: {{ h.time }}{% if not loop.last %}<br>{% endif %}{% endfor %}</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+{%- if cityCombos.length %}
+<section class="section section--panel">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("pin") }}{{ name }}, MO</p>
+      <h2>Popular Services in {{ name }}</h2>
+    </div>
+    <ul class="link-tiles">
+      {%- for c in cityCombos %}
+      <li><a class="link-tile" href="{{ c.url }}">{{ icon(c.service.icon) }}<span><strong>{{ c.service.shortTitle or c.service.title }}</strong> in {{ name }}</span>{{ icon("arrow") }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section{% if not cityCombos.length %} section--panel{% endif %}">
+  <div class="container">
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+{%- set whyCity = name %}
+{% include "partials/why-grid.njk" %}
+
+<section class="section">
+  <div class="container areas">
+    <div class="areas__copy">
+      <p class="eyebrow">{{ icon("crosshair") }}Nearby</p>
+      <h2>Also Serving Near {{ name }}</h2>
+      <p>Brant's Termite &amp; Pest Control also provides pest control in these nearby communities:</p>
+      <ul class="chip-list">
+        {%- for a in collections.areas | without(slug) %}
+        <li><a class="chip{% if a.data.county == county %} chip--featured{% endif %}" href="{{ a.url }}">{{ a.data.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- set mapHighlight = name %}
+    {% include "partials/area-map.njk" %}
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container container--narrow">
+    {%- set faqTitle = "Pest Control in " ~ name ~ ": FAQs" %}
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+
+{%- set ctaTitle = "Need Pest Control in " ~ name ~ "?" %}
+{%- set ctaText = "Call " ~ site.name ~ " today for fast, professional service in " ~ name ~ " and the surrounding area." %}
+{% include "partials/cta-band.njk" %}

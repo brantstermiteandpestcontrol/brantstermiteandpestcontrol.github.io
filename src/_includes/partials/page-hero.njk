@@ -1,0 +1,29 @@
+{#- Interior page header. Reads: crumbs, heroEyebrow, heroTitle, heroIntro, heroIcon -#}
+{% from "partials/icons.njk" import icon %}
+<section class="page-hero">
+  <div class="page-hero__rings" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    {%- if crumbs %}
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        {%- for crumb in crumbs %}
+        <li>{% if crumb.url and not loop.last %}<a href="{{ crumb.url }}">{{ crumb.label }}</a>{% else %}<span aria-current="page">{{ crumb.label }}</span>{% endif %}</li>
+        {%- endfor %}
+      </ol>
+    </nav>
+    {%- endif %}
+    <div class="page-hero__head">
+      {%- if heroIcon %}<span class="page-hero__icon">{{ icon(heroIcon) }}</span>{% endif %}
+      <div>
+        {%- if heroEyebrow %}<p class="eyebrow">{{ icon("crosshair") }}{{ heroEyebrow }}</p>{% endif %}
+        <h1 class="page-hero__title">{{ heroTitle or title }}</h1>
+      </div>
+    </div>
+    {%- if heroIntro %}<p class="page-hero__intro">{{ heroIntro }}</p>{% endif %}
+    <div class="btn-row">
+      <a class="btn btn--gold" href="{{ site.phone | telHref }}">{{ icon("phone") }} Call {{ site.phone }}</a>
+      {%- if page.url == "/contact/" %}<a class="btn btn--ghost" href="#quote">Fill Out the Form</a>{% else %}<a class="btn btn--ghost" href="/contact/">Get a Free Quote</a>{% endif %}
+    </div>
+  </div>
+</section>

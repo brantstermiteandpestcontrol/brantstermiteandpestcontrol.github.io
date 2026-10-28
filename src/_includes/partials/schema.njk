@@ -1,0 +1,90 @@
+{#- Structured data (JSON-LD) so Google understands the business, its services, and where it works. -#}
+{%- set sameAs = [site.googleProfileUrl, site.facebookUrl] | compact -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "additionalType": "https://en.wikipedia.org/wiki/Pest_control",
+  "@id": {{ (site.url ~ "/#business") | dump | safe }},
+  "name": {{ site.name | dump | safe }},
+  "legalName": {{ site.legalName | dump | safe }},
+  "slogan": {{ site.tagline | dump | safe }},
+  "description": {{ (site.name ~ " provides residential and commercial pest control in " ~ site.region ~ ": termite control, bed bug treatments, mosquito and tick control, ant, cockroach and spider control, wasp and hornet removal, live trapping, wildlife control, and snake removal.") | dump | safe }},
+  "url": {{ (site.url ~ "/") | dump | safe }},
+  "telephone": {{ ("+1-" ~ site.phone) | dump | safe }},
+  {%- if site.email %}
+  "email": {{ site.email | dump | safe }},
+  {%- endif %}
+  "image": {{ ("/assets/img/og-image.jpg" | absoluteUrl(site.url)) | dump | safe }},
+  "logo": {{ ("/assets/img/icon-512.png" | absoluteUrl(site.url)) | dump | safe }},
+  "openingHours": {{ site.openingHours | dump | safe }},
+  "founder": { "@type": "Person", "name": {{ site.owner | dump | safe }} },
+  "address": {
+    "@type": "PostalAddress",
+    {%- if site.showAddress %}
+    "streetAddress": {{ site.address.street | dump | safe }},
+    {%- endif %}
+    "addressLocality": {{ site.address.city | dump | safe }},
+    "addressRegion": {{ site.address.state | dump | safe }},
+    "postalCode": {{ site.address.zip | dump | safe }},
+    "addressCountry": "US"
+  },
+  {%- if sameAs.length %}
+  "sameAs": {{ sameAs | dump | safe }},
+  {%- endif %}
+  "areaServed": [
+    {%- for area in collections.areas %}
+    { "@type": "City", "name": {{ (area.data.name ~ ", MO") | dump | safe }} }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Pest Control Services",
+    "itemListElement": [
+      {%- for s in collections.services %}
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ s.data.title | dump | safe }}, "url": {{ (s.url | absoluteUrl(site.url)) | dump | safe }} } }{% if not loop.last %},{% endif %}
+      {%- endfor %}
+    ]
+  }
+}
+</script>
+{%- if crumbs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ (site.url ~ "/") | dump | safe }} }
+    {%- for crumb in crumbs %},
+    { "@type": "ListItem", "position": {{ loop.index + 1 }}, "name": {{ crumb.label | dump | safe }}, "item": {{ ((crumb.url or page.url) | absoluteUrl(site.url)) | dump | safe }} }
+    {%- endfor %}
+  ]
+}
+</script>
+{%- endif %}
+{%- if serviceSchema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": {{ serviceSchema.name | dump | safe }},
+  "serviceType": {{ serviceSchema.type | dump | safe }},
+  "provider": { "@id": {{ (site.url ~ "/#business") | dump | safe }} },
+  "areaServed": {{ serviceSchema.area | dump | safe }},
+  "url": {{ (page.url | absoluteUrl(site.url)) | dump | safe }}
+}
+</script>
+{%- endif %}
+{%- if allFaqs and allFaqs.length %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for f in allFaqs %}
+    { "@type": "Question", "name": {{ f.q | dump | safe }}, "acceptedAnswer": { "@type": "Answer", "text": {{ f.a | dump | safe }} } }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
+</script>
+{%- endif %}

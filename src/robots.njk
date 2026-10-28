@@ -1,0 +1,26 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+# Brant's Termite & Pest Control — all search engines and AI assistants are welcome.
+User-agent: *
+Allow: /
+Disallow: /thank-you/
+
+# AI search & assistant crawlers (allowed explicitly so the business shows up in AI answers)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: DuckAssistBot
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | absoluteUrl(site.url) }}

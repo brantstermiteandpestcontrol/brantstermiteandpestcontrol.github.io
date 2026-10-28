@@ -1,0 +1,26 @@
+{
+  "title": "Our Process",
+  "intro": "Every job follows the same proven approach — so the problem gets solved, not just sprayed.",
+  "steps": [
+    {
+      "icon": "search",
+      "title": "Inspect",
+      "text": "A thorough inspection inside and out to find where pests are living, feeding, and getting in."
+    },
+    {
+      "icon": "crosshair",
+      "title": "Identify",
+      "text": "We pinpoint the pest and the source of the problem, then explain exactly what we found."
+    },
+    {
+      "icon": "spray",
+      "title": "Treat",
+      "text": "Targeted treatments matched to the pest and your property — applied right the first time."
+    },
+    {
+      "icon": "shield",
+      "title": "Protect",
+      "text": "Ongoing protection and prevention so pests stay gone and don't come back next season."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{% from "partials/icons.njk" import icon %}
+{%- set featuredAreas = collections.areas | featuredOnly -%}
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__item">{{ icon("pin") }} Serving {{ site.address.city }}, Sedalia, Kansas City &amp; {{ site.region }}</p>
+    <p class="topbar__item topbar__item--right">
+      <span>{{ icon("clock") }} {% for h in site.hours %}{% if h.time != "Closed" %}{{ h.days | replace(" – ", "–") | replace("Monday", "Mon") | replace("Friday", "Fri") }} {{ h.time | replace(":00", "") | replace(" AM", "am") | replace(" PM", "pm") }}{% endif %}{% endfor %}</span>
+      <span>{{ icon("shield") }} {{ site.badges[0] }}</span>
+    </p>
+  </div>
+</div>
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label="{{ site.name }} — home">
+      <img class="brand__mark" src="/assets/img/mark.png" alt="" width="52" height="52">
+      <span class="brand__text">
+        <img class="brand__word" src="/assets/img/wordmark.png" alt="Brant's" width="141" height="22">
+        <span class="brand__sub">Termite &amp; Pest Control</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Main" data-nav>
+      <ul class="nav__list">
+        <li><a class="nav__link" href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a class="nav__link" href="/residential/" {% if page.url == "/residential/" %}aria-current="page"{% endif %}>Residential</a></li>
+        <li><a class="nav__link" href="/commercial/" {% if page.url == "/commercial/" %}aria-current="page"{% endif %}>Commercial</a></li>
+        <li class="nav__item--drop">
+          <a class="nav__link" href="/services/" {% if page.url.startsWith("/services/") %}aria-current="page"{% endif %}>Services</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Show services">{{ icon("chevron") }}</button>
+          <ul class="nav__drop">
+            {%- for s in collections.services %}
+            <li><a href="{{ s.url }}">{{ icon(s.data.icon) }}<span>{{ s.data.title }}</span></a></li>
+            {%- endfor %}
+            <li class="nav__drop-all"><a href="/services/">All services {{ icon("arrow") }}</a></li>
+          </ul>
+        </li>
+        <li class="nav__item--drop">
+          <a class="nav__link" href="/service-areas/" {% if page.url.startsWith("/service-areas/") %}aria-current="page"{% endif %}>Service Areas</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Show service areas">{{ icon("chevron") }}</button>
+          <ul class="nav__drop nav__drop--areas">
+            {%- for a in featuredAreas %}
+            <li><a href="{{ a.url }}">{{ icon("pin") }}<span>{{ a.data.name }}, MO</span></a></li>
+            {%- endfor %}
+            <li class="nav__drop-all"><a href="/service-areas/">All {{ collections.areas.length }} service areas {{ icon("arrow") }}</a></li>
+          </ul>
+        </li>
+        <li><a class="nav__link" href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a></li>
+        <li class="nav__mobile-only"><a class="nav__link" href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="btn btn--ghost btn--sm site-header__quote" href="/contact/">Free Quote</a>
+      <a class="btn btn--gold btn--sm" href="{{ site.phone | telHref }}">{{ icon("phone") }}<span class="site-header__phone">{{ site.phone }}</span><span class="visually-hidden site-header__phone-label">Call {{ site.phone }}</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu-btn>
+        <span class="menu-btn__open">{{ icon("menu") }}</span><span class="menu-btn__close">{{ icon("close") }}</span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>

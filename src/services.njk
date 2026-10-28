@@ -1,0 +1,56 @@
+---
+layout: layouts/base.njk
+title: Pest Control Services
+navTitle: Services
+permalink: /services/
+seoTitle: Pest Control Services Warrensburg MO | Termites, Bed Bugs & More
+metaDescription: Full-service pest control in Warrensburg & Central MO — termites, roaches, bed bugs, mosquitoes, ants, spiders, wasps, wildlife & snakes. Call 660-909-7284.
+faqs:
+  - q: Do you handle both homes and businesses?
+    a: Yes. Every service we offer is available for residential and commercial properties, from single-family homes to apartment complexes, restaurants, warehouses, and city properties.
+  - q: What if I'm not sure what kind of pest I have?
+    a: That's what the inspection is for. Call us, tell us what you're seeing, and we'll identify the pest and recommend the right treatment.
+---
+{% from "partials/icons.njk" import icon %}
+{%- set heroTitle = "Complete Pest Control Services" -%}
+{%- set heroEyebrow = "Residential & Commercial" -%}
+{%- set heroIntro = "We offer a full range of pest control for homes and businesses. Whether you're dealing with termites, mosquitoes, ants, roaches, bed bugs, spiders, wasps, snakes, or nuisance wildlife, we provide dependable treatments designed to eliminate the problem and keep it from returning." -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container">
+    <ul class="service-rows">
+      {%- for s in collections.services %}
+      <li class="service-row">
+        <span class="service-row__icon">{{ icon(s.data.icon) }}</span>
+        <div class="service-row__body">
+          <h2><a href="{{ s.url }}">{{ s.data.title }}</a></h2>
+          <p>{{ s.data.intro }}</p>
+          {%- if s.data.includes %}
+          <ul class="service-row__tags">
+            {%- for item in s.data.includes | limit(4) %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+          {%- endif %}
+        </div>
+        <a class="btn btn--ghost btn--sm service-row__btn" href="{{ s.url }}">Learn more {{ icon("arrow") }}</a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container">
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+{% include "partials/why-grid.njk" %}
+
+<section class="section section--panel">
+  <div class="container container--narrow">
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+
+{% include "partials/cta-band.njk" %}

@@ -1,0 +1,60 @@
+# Builds the site and publishes it to GitHub Pages on every change to main
+# (including edits saved from Pages CMS). Usually live within ~1 minute.
+name: Build & publish website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+
+  # Tell Bing (which also powers ChatGPT search, Copilot, and DuckDuckGo) that pages changed.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          SITE=$(node -p "require('./src/_data/site.json').url")
+          KEY=$(node -p "require('./src/_data/site.json').indexNowKey")
+          HOST=$(node -p "new URL('$SITE').host")
+          URLS=$(curl -fsSL "$SITE/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>console.log(JSON.stringify(d.trim().split("\n"))))')
+          curl -fsS -X POST "https://api.indexnow.org/indexnow" -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"$SITE/$KEY.txt\",\"urlList\":$URLS}" \
+            && echo "IndexNow: submitted"

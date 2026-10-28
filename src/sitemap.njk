@@ -1,0 +1,16 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in collections.all %}
+{%- if not p.data.noindex and p.url and not p.url.endsWith(".txt") and not p.url.endsWith(".xml") %}
+  <url>
+    <loc>{{ p.url | absoluteUrl(site.url) }}</loc>
+    <lastmod>{{ p.date.toISOString().slice(0, 10) }}</lastmod>
+    <priority>{% if p.url == "/" %}1.0{% elif p.data.servicePage or p.data.areaPage %}0.8{% elif p.data.combo %}0.6{% else %}0.7{% endif %}</priority>
+  </url>
+{%- endif %}
+{%- endfor %}
+</urlset>

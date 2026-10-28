@@ -1,0 +1,36 @@
+{#- "Radar" map of every service area, centered on the home-base city. Optional: mapHighlight (city name) -#}
+{%- set map = collections.areas | mapLayout -%}
+{%- if map %}
+<figure class="area-map">
+  <svg class="area-map__svg" viewBox="{{ map.viewBox }}" role="img" aria-labelledby="area-map-title">
+    <title id="area-map-title">Map of {{ site.name }} service areas around {{ site.address.city }}, Missouri</title>
+    <defs>
+      <radialGradient id="map-glow">
+        <stop offset="0" stop-color="#2d55d6" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#2d55d6" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="0" cy="0" r="{{ map.rings[2].r }}" fill="url(#map-glow)"/>
+    {%- for ring in map.rings %}
+    <circle class="area-map__ring" cx="0" cy="0" r="{{ ring.r }}"/>
+    <text class="area-map__ring-label" x="{{ ring.r * 0.7071 + 4 }}" y="{{ -ring.r * 0.7071 - 4 }}">{{ ring.mi }} mi</text>
+    {%- endfor %}
+    <line class="area-map__axis" x1="{{ map.bounds.minX }}" y1="0" x2="{{ map.bounds.maxX }}" y2="0"/>
+    <line class="area-map__axis" x1="0" y1="{{ map.bounds.minY }}" x2="0" y2="{{ map.bounds.maxY }}"/>
+    {%- for p in map.points %}
+    {%- set lx = p.x + 9 if p.label == "right" else (p.x - 9 if p.label == "left" else p.x) %}
+    {%- set ly = p.y - 11 if p.label == "top" else (p.y + 20 if p.label == "bottom" else p.y + 4.5) %}
+    {%- set anchor = "start" if p.label == "right" else ("end" if p.label == "left" else "middle") %}
+    <a href="{{ p.url }}" class="area-map__pt{% if p.featured %} is-featured{% endif %}{% if p.hq %} is-hq{% endif %}{% if mapHighlight == p.name %} is-current{% endif %}">
+      {%- if p.hq %}
+      <circle class="area-map__hq-ring" cx="{{ p.x }}" cy="{{ p.y }}" r="13"/>
+      <path class="area-map__hq-cross" d="M{{ p.x - 19 }} {{ p.y }}h11M{{ p.x + 8 }} {{ p.y }}h11M{{ p.x }} {{ p.y - 19 }}v11M{{ p.x }} {{ p.y + 8 }}v11"/>
+      {%- endif %}
+      <circle class="area-map__dot" cx="{{ p.x }}" cy="{{ p.y }}" r="{{ 6 if p.hq else (4.6 if p.featured else 3.6) }}"/>
+      <text class="area-map__label" x="{{ lx }}" y="{{ (p.y - 22) if p.hq else ly }}" text-anchor="{{ 'middle' if p.hq else anchor }}">{{ p.name }}{% if p.hq %} · HQ{% endif %}</text>
+    </a>
+    {%- endfor %}
+  </svg>
+  <figcaption class="area-map__caption">Based in {{ site.address.city }} — serving homes and businesses up to about 60 miles out. Tap a town for local service details.</figcaption>
+</figure>
+{%- endif %}

@@ -1,0 +1,21 @@
+{
+  "name": "brants-termite-and-pest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Brant's Termite & Pest Control — www.brantstermiteandpest.com",
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6",
+    "markdown-it": "14.3.2"
+  },
+  "overrides": {
+    "markdown-it": "14.3.2"
+  }
+}

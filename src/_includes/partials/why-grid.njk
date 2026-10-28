@@ -1,0 +1,20 @@
+{#- Optional: whyCity (adds the city name to the heading) -#}
+{% from "partials/icons.njk" import icon %}
+<section class="section section--panel">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}Why Brant's</p>
+      <h2>{% if whyCity %}Why {{ whyCity }} Chooses Brant's{% else %}{{ why.title }}{% endif %}</h2>
+      <p>{{ why.intro }}</p>
+    </div>
+    <ul class="why-grid">
+      {%- for p in why.points %}
+      <li class="why-card">
+        <span class="why-card__icon">{{ icon(p.icon) }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

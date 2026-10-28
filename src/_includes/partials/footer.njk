@@ -1,0 +1,53 @@
+{% from "partials/icons.njk" import icon %}
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="/assets/img/logo-full.png" alt="{{ site.name }} logo" width="180" height="215" loading="lazy">
+      <p class="site-footer__tagline">{{ site.tagline }}</p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Services</h2>
+      <ul class="site-footer__links">
+        {%- for s in collections.services %}
+        <li><a href="{{ s.url }}">{{ s.data.title }}</a></li>
+        {%- endfor %}
+        <li><a href="/residential/">Residential Pest Control</a></li>
+        <li><a href="/commercial/">Commercial Pest Control</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Service Areas</h2>
+      <ul class="site-footer__links site-footer__links--cols">
+        {%- for a in collections.areas %}
+        <li><a href="{{ a.url }}">{{ a.data.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Contact</h2>
+      <ul class="site-footer__contact">
+        <li>{{ icon("phone") }}<a href="{{ site.phone | telHref }}"><strong>{{ site.phone }}</strong></a></li>
+        {%- if site.email %}<li>{{ icon("mail") }}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+        {%- if site.showAddress %}
+        <li>{{ icon("pin") }}<span>{{ site.address.street }}<br>{{ site.address.city }}, {{ site.address.state }} {{ site.address.zip }}</span></li>
+        {%- endif %}
+        <li>{{ icon("clock") }}<span>{% for h in site.hours %}{{ h.days }}: {{ h.time }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span></li>
+      </ul>
+      <a class="btn btn--blue btn--sm" href="/contact/">Request a Free Quote</a>
+    </div>
+  </div>
+
+  <div class="container site-footer__serving">
+    <p>{{ site.name }} proudly serves {{ collections.areas | cityList }} — residential and commercial pest control throughout {{ site.region }}.</p>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container site-footer__bottom-inner">
+      <p>&copy; {{ year }} {{ site.legalName }}. All rights reserved.</p>
+      <p><a href="/services/">Services</a> · <a href="/service-areas/">Service Areas</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></p>
+    </div>
+  </div>
+</footer>

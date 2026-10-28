@@ -1,0 +1,13 @@
+---
+# Service + city pages, e.g. /service-areas/sedalia/termite-control/
+# One page for every service with "Create city pages" on × every city marked "Featured".
+pagination:
+  data: collections.combos
+  size: 1
+  alias: combo
+  addAllPagesToCollections: true
+layout: layouts/combo.njk
+permalink: "{{ combo.url }}"
+eleventyComputed:
+  title: "{{ combo.service.shortTitle or combo.service.title }} in {{ combo.area.name }}, MO"
+---

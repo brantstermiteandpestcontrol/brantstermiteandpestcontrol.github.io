@@ -1,0 +1,15 @@
+{% from "partials/icons.njk" import icon %}
+<div class="process">
+  <h2 class="process__title">{{ process.title }}</h2>
+  <p class="process__intro">{{ process.intro }}</p>
+  <ol class="process__steps">
+    {%- for step in process.steps %}
+    <li class="process__step">
+      <span class="process__num">0{{ loop.index }}</span>
+      <span class="process__icon">{{ icon(step.icon) }}</span>
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.text }}</p>
+    </li>
+    {%- endfor %}
+  </ol>
+</div>

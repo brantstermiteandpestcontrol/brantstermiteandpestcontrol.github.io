@@ -1,0 +1,36 @@
+{
+  "title": "Why Choose Brant's Termite & Pest Control",
+  "intro": "We provide reliable, professional pest control designed to eliminate pests and protect your property long-term — with the kind of service you only get from a local, owner-operated company.",
+  "points": [
+    {
+      "icon": "shield",
+      "title": "Licensed & Insured",
+      "text": "Professional, fully licensed and insured service on every job — home or business."
+    },
+    {
+      "icon": "handshake",
+      "title": "Local & Trusted",
+      "text": "Locally owned and operated in Warrensburg. You'll deal with the owner, not a call center."
+    },
+    {
+      "icon": "building",
+      "title": "Residential & Commercial",
+      "text": "Homes, rentals, apartment complexes, restaurants, offices, warehouses, and city properties."
+    },
+    {
+      "icon": "family",
+      "title": "Safe for Families & Pets",
+      "text": "Targeted treatments applied with your kids, pets, and property in mind."
+    },
+    {
+      "icon": "bolt",
+      "title": "Fast Response",
+      "text": "Pest problems don't wait, and neither do we. Call and we'll get you on the schedule quickly."
+    },
+    {
+      "icon": "calendar",
+      "title": "Monthly Plans Available",
+      "text": "Ongoing protection plans that keep pests out year-round — not just for a few weeks."
+    }
+  ]
+}

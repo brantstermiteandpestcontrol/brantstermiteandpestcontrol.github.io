@@ -1,0 +1,15 @@
+{#- Big call-to-action band. Optional: ctaTitle, ctaText -#}
+{% from "partials/icons.njk" import icon %}
+<section class="cta-band">
+  <div class="cta-band__reticle" aria-hidden="true">{{ icon("crosshair", "cta-band__reticle-svg") }}</div>
+  <div class="container cta-band__inner">
+    <div>
+      <h2 class="cta-band__title">{{ ctaTitle or "Don't Let Pests Take Over Your Property" }}</h2>
+      <p class="cta-band__text">{{ ctaText or "Call today for fast, professional pest control service. Free quotes for homes and businesses." }}</p>
+    </div>
+    <div class="cta-band__actions">
+      <a class="btn btn--gold btn--lg" href="{{ site.phone | telHref }}">{{ icon("phone") }} {{ site.phone }}</a>
+      <a class="btn btn--white btn--lg" href="/contact/">Request a Free Quote</a>
+    </div>
+  </div>
+</section>

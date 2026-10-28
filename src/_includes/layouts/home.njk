@@ -1,0 +1,123 @@
+---
+layout: layouts/base.njk
+bodyClass: is-home
+---
+{% from "partials/icons.njk" import icon %}
+{%- set defaultPhoto = "/assets/img/tyler-spraying-800.jpg" -%}
+
+<section class="hero">
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow">{{ icon("crosshair") }}{{ hero.eyebrow }}</p>
+      <h1 class="hero__title">
+        <span>{{ hero.headline }}</span>
+        <span class="hero__title-accent">{{ hero.headlineAccent }}</span>
+      </h1>
+      <p class="hero__sub">{{ hero.subheadline }}</p>
+      <div class="btn-row">
+        <a class="btn btn--gold btn--lg" href="{{ site.phone | telHref }}">{{ icon("phone") }} Call Now: {{ site.phone }}</a>
+        <a class="btn btn--ghost btn--lg" href="/contact/">Get a Free Quote</a>
+      </div>
+      <ul class="hero__badges">
+        {%- for b in site.badges %}
+        <li>{{ icon("shield") }}{{ b }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    <div class="hero__media">
+      <div class="hero__rings" aria-hidden="true"></div>
+      <div class="reticle hero__photo">
+        {%- if not hero.image or hero.image == defaultPhoto %}
+        <picture>
+          <source type="image/webp" srcset="/assets/img/tyler-spraying-480.webp 480w, /assets/img/tyler-spraying-800.webp 800w" sizes="(min-width: 960px) 440px, 90vw">
+          <img src="/assets/img/tyler-spraying-800.jpg" srcset="/assets/img/tyler-spraying-480.jpg 480w, /assets/img/tyler-spraying-800.jpg 800w" sizes="(min-width: 960px) 440px, 90vw" width="800" height="1000" alt="{{ hero.imageAlt or (site.owner ~ ' spraying a pest treatment around a home') }}" fetchpriority="high">
+        </picture>
+        {%- else %}
+        <img src="{{ hero.image }}" width="800" height="1000" alt="{{ hero.imageAlt }}" fetchpriority="high">
+        {%- endif %}
+        <p class="hero__tag">
+          <img src="/assets/img/mark-white.png" alt="" width="34" height="34">
+          <span><strong>{{ site.owner }}</strong>{{ site.ownerTitle }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="hero__intro">{{ hero.intro }}</p>
+  </div>
+</section>
+
+{% include "partials/why-grid.njk" %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="eyebrow">{{ icon("crosshair") }}Services</p>
+        <h2>{{ services.title }}</h2>
+      </div>
+      <p>{{ services.text }}</p>
+    </div>
+    {% include "partials/service-cards.njk" %}
+    <p class="section-foot"><a class="btn btn--ghost" href="/services/">View All Services {{ icon("arrow") }}</a></p>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container split">
+    {%- for side in [residential, commercial] %}
+    <article class="split-card split-card--{{ 'res' if loop.first else 'com' }}">
+      <span class="split-card__bg" aria-hidden="true">{{ icon("home" if loop.first else "building") }}</span>
+      <p class="eyebrow">{{ icon("home" if loop.first else "building") }}{{ "For Homeowners" if loop.first else "For Businesses" }}</p>
+      <h2>{{ side.title }}</h2>
+      <p>{{ side.text }}</p>
+      <ul class="checklist">
+        {%- for item in side.points %}<li>{{ icon("check") }}{{ item }}</li>{% endfor %}
+      </ul>
+      <a class="btn {{ 'btn--blue' if loop.first else 'btn--white' }}" href="{{ '/residential/' if loop.first else '/commercial/' }}">{{ side.button }} {{ icon("arrow") }}</a>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container areas">
+    <div class="areas__copy">
+      <p class="eyebrow">{{ icon("crosshair") }}Service Areas</p>
+      <h2>{{ areas.title }}</h2>
+      <p>{{ areas.text }}</p>
+      <ul class="chip-list">
+        {%- for a in collections.areas %}
+        <li><a class="chip{% if a.data.featured %} chip--featured{% endif %}" href="{{ a.url }}">{{ a.data.name }}</a></li>
+        {%- endfor %}
+      </ul>
+      <p class="areas__note">{{ areas.note }}</p>
+    </div>
+    {% include "partials/area-map.njk" %}
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container about-home">
+    <div class="about-home__copy">
+      <p class="eyebrow">{{ icon("crosshair") }}About Us</p>
+      <h2>{{ about.title }}</h2>
+      {{ about.text | md | safe }}
+      <a class="btn btn--ghost" href="/about/">Meet {{ site.owner }} {{ icon("arrow") }}</a>
+    </div>
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+{% include "partials/reviews.njk" %}
+
+<section class="section">
+  <div class="container container--narrow">
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+
+{%- set ctaTitle = cta.title %}{% set ctaText = cta.text %}
+{% include "partials/cta-band.njk" %}

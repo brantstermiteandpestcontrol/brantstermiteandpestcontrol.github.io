@@ -1,0 +1,56 @@
+{#- Free-quote form. Submissions are emailed by Web3Forms (free) once site.quoteForm.web3formsKey is set. -#}
+{% from "partials/icons.njk" import icon %}
+<form class="quote-form" action="https://api.web3forms.com/submit" method="POST" data-quote-form{% if not site.quoteForm.web3formsKey %} data-unconfigured{% endif %}>
+  <input type="hidden" name="access_key" value="{{ site.quoteForm.web3formsKey }}">
+  <input type="hidden" name="subject" value="{{ site.quoteForm.subject }}">
+  <input type="hidden" name="from_name" value="{{ site.name }} website">
+  <input type="hidden" name="redirect" value="{{ '/thank-you/' | absoluteUrl(site.url) }}">
+  <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+  <div class="quote-form__grid">
+    <label class="field">
+      <span class="field__label">Name <span aria-hidden="true">*</span></span>
+      <input type="text" name="name" autocomplete="name" required>
+    </label>
+    <label class="field">
+      <span class="field__label">Phone <span aria-hidden="true">*</span></span>
+      <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required>
+    </label>
+    <label class="field">
+      <span class="field__label">Email</span>
+      <input type="email" name="email" autocomplete="email">
+    </label>
+    <label class="field">
+      <span class="field__label">City</span>
+      <select name="city">
+        <option value="">Select your city</option>
+        {%- for a in collections.areas %}
+        <option>{{ a.data.name }}</option>
+        {%- endfor %}
+        <option>Other / nearby</option>
+      </select>
+    </label>
+    <label class="field field--full">
+      <span class="field__label">Service address</span>
+      <input type="text" name="address" autocomplete="street-address">
+    </label>
+    <label class="field field--full">
+      <span class="field__label">What do you need help with?</span>
+      <select name="service">
+        <option value="">Choose a service</option>
+        {%- for s in collections.services %}
+        <option>{{ s.data.title }}</option>
+        {%- endfor %}
+        <option>General pest control / monthly plan</option>
+        <option>Commercial property</option>
+        <option>Not sure — need an inspection</option>
+      </select>
+    </label>
+    <label class="field field--full">
+      <span class="field__label">Details</span>
+      <textarea name="message" rows="4" placeholder="What are you seeing, and where?"></textarea>
+    </label>
+  </div>
+  <button class="btn btn--gold btn--lg btn--block" type="submit">Send My Free Quote Request {{ icon("arrow") }}</button>
+  <p class="quote-form__note" data-form-note>Prefer to talk? Call <a href="{{ site.phone | telHref }}">{{ site.phone }}</a>.</p>
+</form>

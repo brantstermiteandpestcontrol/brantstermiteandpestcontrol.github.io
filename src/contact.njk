@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: Contact
+permalink: /contact/
+seoTitle: Free Pest Control Quote | Contact Brant's Termite & Pest
+metaDescription: Get a free pest control quote from Brant's Termite & Pest Control in Warrensburg, MO. Call 660-909-7284 or request a quote online.
+---
+{% from "partials/icons.njk" import icon %}
+{%- set heroTitle = "Get Your Free Quote Today" -%}
+{%- set heroEyebrow = "Contact Us" -%}
+{%- set heroIntro = "Have a pest problem? We're here to help. Call us today or fill out the form below for residential or commercial pest control, termite treatments, mosquito control, wildlife removal, and more." -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-form-wrap" id="quote">
+      <h2>Request a Free Quote</h2>
+      <p>Tell us what's going on and we'll get back to you during business hours.</p>
+      {% include "partials/quote-form.njk" %}
+    </div>
+
+    <div class="aside-stack">
+      <div class="contact-card">
+        <p class="contact-card__label">Call us</p>
+        <a class="contact-card__phone" href="{{ site.phone | telHref }}">{{ site.phone }}</a>
+        <ul class="contact-card__list">
+          {%- if site.email %}<li>{{ icon("mail") }}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+          {%- if site.showAddress %}
+          <li>{{ icon("pin") }}<span>{{ site.name }}<br>{{ site.address.street }}<br>{{ site.address.city }}, {{ site.address.state }} {{ site.address.zip }}</span></li>
+          {%- endif %}
+          <li>{{ icon("clock") }}<span>{% for h in site.hours %}<strong>{{ h.days }}:</strong> {{ h.time }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span></li>
+          <li>{{ icon("shield") }}<span>{{ site.owner }}, {{ site.ownerTitle }}</span></li>
+        </ul>
+      </div>
+      <div class="contact-card contact-card--areas">
+        <p class="contact-card__label">Serving</p>
+        <ul class="chip-list">
+          {%- for a in collections.areas %}<li><a class="chip chip--sm" href="{{ a.url }}">{{ a.data.name }}</a></li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

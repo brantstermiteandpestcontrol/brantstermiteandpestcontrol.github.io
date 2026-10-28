@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+title: Service Areas
+permalink: /service-areas/
+seoTitle: Service Areas | Pest Control Warrensburg, Sedalia & Kansas City
+metaDescription: Pest control in Warrensburg, Sedalia, Lee's Summit, Blue Springs, Kansas City, Clinton, Warsaw, Richmond & more across Central Missouri. Call 660-909-7284.
+---
+{% from "partials/icons.njk" import icon %}
+{%- set heroTitle = "Areas We Serve" -%}
+{%- set heroEyebrow = "Central Missouri & Kansas City" -%}
+{%- set heroIntro = site.name ~ " proudly provides residential and commercial pest control in " ~ (collections.areas | cityList) ~ "." -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container areas areas--page">
+    {% include "partials/area-map.njk" %}
+    <div class="county-list">
+      {%- for county, list in collections.areas | groupby("data.county") %}
+      <div class="county-list__group">
+        <h2 class="county-list__title">{{ county }}</h2>
+        <ul>
+          {%- for a in list %}
+          <li><a href="{{ a.url }}">{{ icon("pin") }}<span>Pest Control in {{ a.data.name }}, MO</span></a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- set featured = collections.areas | featuredOnly %}
+{%- if collections.combos.length %}
+<section class="section section--panel">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}Popular Searches</p>
+      <h2>Top Services in Our Busiest Cities</h2>
+    </div>
+    <div class="combo-matrix">
+      {%- for a in featured %}
+      <div class="combo-matrix__col">
+        <h3><a href="{{ a.url }}">{{ a.data.name }}</a></h3>
+        <ul>
+          {%- for c in collections.combos | comboFor({ area: a.fileSlug }) %}
+          <li><a href="{{ c.url }}">{{ c.service.shortTitle or c.service.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section">
+  <div class="container container--narrow center">
+    <h2>Don't See Your Town?</h2>
+    <p>We regularly travel throughout {{ site.region }}. If you're near any of the communities above, call <a href="{{ site.phone | telHref }}">{{ site.phone }}</a> — residential and commercial service is available throughout all listed areas.</p>
+  </div>
+</section>
+
+{% include "partials/cta-band.njk" %}

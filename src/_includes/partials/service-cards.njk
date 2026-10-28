@@ -1,0 +1,15 @@
+{#- Grid of service cards. Optional: cardsArea (area slug — links to the city version of a service when one exists) -#}
+{% from "partials/icons.njk" import icon %}
+<ul class="service-grid">
+  {%- for s in collections.services %}
+  {%- set href = (collections.combos | comboUrl(cardsArea, s.fileSlug)) if cardsArea else null %}
+  <li>
+    <a class="service-card" href="{{ href or s.url }}">
+      <span class="service-card__icon">{{ icon(s.data.icon) }}</span>
+      <h3 class="service-card__title">{{ s.data.title }}</h3>
+      <p class="service-card__text">{{ s.data.summary }}</p>
+      <span class="service-card__more">{% if href %}{{ s.data.shortTitle or s.data.title }} in {{ cardsAreaName }}{% else %}Learn more{% endif %} {{ icon("arrow") }}</span>
+    </a>
+  </li>
+  {%- endfor %}
+</ul>

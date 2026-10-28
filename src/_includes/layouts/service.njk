@@ -1,0 +1,98 @@
+---
+layout: layouts/base.njk
+---
+{#- Capture the page's "icon" field before the icon() macro import shadows it. -#}
+{%- set pestIcon = icon -%}
+{% from "partials/icons.njk" import icon %}
+{%- set heroTitle = headline or title -%}
+{%- set heroIntro = intro -%}
+{%- set heroEyebrow = "Residential & Commercial" -%}
+{%- set heroIcon = pestIcon -%}
+{%- set slug = page.fileSlug -%}
+{%- set cityVersions = collections.combos | comboFor({ service: slug }) -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container content-grid">
+    <div class="prose">
+      {%- if includes and includes.length %}
+      <div class="feature-block feature-block--boxed">
+        <h2>Our {{ title }} Services Include</h2>
+        <ul class="checklist checklist--cols">
+          {%- for item in includes %}<li>{{ icon("check") }}{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+
+      {{ content | safe }}
+
+      {%- if signs and signs.length %}
+      <div class="feature-block feature-block--signs">
+        <h2>{{ signsTitle or "Warning Signs to Watch For" }}</h2>
+        <ul class="signs">
+          {%- for s in signs %}<li>{{ icon(pestIcon) }}<span>{{ s }}</span></li>{% endfor %}
+        </ul>
+        <p>Seeing any of these? <a href="{{ site.phone | telHref }}">Call {{ site.phone }}</a> and we'll take a look.</p>
+      </div>
+      {%- endif %}
+
+      <h2>Residential &amp; Commercial {{ shortTitle or title }}</h2>
+      <p>We provide {{ (shortTitle or title) | lower }} for homes, rentals, apartment complexes, restaurants, offices, warehouses, and city properties throughout {{ site.region }}. Every treatment plan is built around your property and your schedule.</p>
+    </div>
+    {% include "partials/call-card.njk" %}
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container">
+    {% include "partials/process.njk" %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("pin") }}Local Service</p>
+      <h2>{{ shortTitle or title }} Near You</h2>
+      <p>Based in {{ site.address.city }}, we provide {{ (shortTitle or title) | lower }} across {{ site.region }} and the Kansas City area.</p>
+    </div>
+    {%- if cityVersions.length %}
+    <ul class="link-tiles">
+      {%- for c in cityVersions %}
+      <li><a class="link-tile" href="{{ c.url }}">{{ icon("pin") }}<span><strong>{{ shortTitle or title }}</strong> {{ c.area.name }}, MO</span>{{ icon("arrow") }}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+    <ul class="chip-list chip-list--center">
+      {%- for a in collections.areas %}
+      <li><a class="chip" href="{{ a.url }}">{{ a.data.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{%- if allFaqs and allFaqs.length %}
+<section class="section section--panel">
+  <div class="container container--narrow">
+    {%- set faqTitle = (shortTitle or title) ~ " FAQs" %}
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}More Services</p>
+      <h2>Other Pests We Handle</h2>
+    </div>
+    <ul class="mini-services">
+      {%- for s in collections.services | without(slug) %}
+      <li><a href="{{ s.url }}">{{ icon(s.data.icon) }}<span>{{ s.data.title }}</span></a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{%- set ctaTitle = "Need " ~ (shortTitle or title) ~ "? Call Today." %}
+{% include "partials/cta-band.njk" %}

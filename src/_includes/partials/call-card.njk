@@ -1,0 +1,13 @@
+{% from "partials/icons.njk" import icon %}
+<aside class="call-card">
+  <img class="call-card__mark" src="/assets/img/mark.png" alt="" width="64" height="64" loading="lazy">
+  <p class="call-card__eyebrow">{{ callCardTitle or "Ready to get rid of them?" }}</p>
+  <a class="call-card__phone" href="{{ site.phone | telHref }}">{{ site.phone }}</a>
+  <p class="call-card__text">Talk to {{ site.owner | replace(" Brant", "") }} directly. Free quotes for homes and businesses.</p>
+  <a class="btn btn--gold btn--block" href="{{ site.phone | telHref }}">{{ icon("phone") }} Call Now</a>
+  <a class="btn btn--ghost btn--block" href="/contact/">Request a Free Quote</a>
+  <ul class="call-card__meta">
+    {%- for h in site.hours %}<li>{{ icon("clock") }}{{ h.days }}: {{ h.time }}</li>{% endfor %}
+    {%- for b in site.badges %}<li>{{ icon("check") }}{{ b }}</li>{% endfor %}
+  </ul>
+</aside>

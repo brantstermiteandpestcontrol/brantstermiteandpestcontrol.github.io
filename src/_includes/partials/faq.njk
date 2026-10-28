@@ -1,0 +1,14 @@
+{#- FAQ accordion. Reads: allFaqs (list of {q, a}), faqTitle -#}
+{%- if allFaqs and allFaqs.length %}
+<section class="faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">{{ faqTitle or "Frequently Asked Questions" }}</h2>
+  <div class="faq__list">
+    {%- for f in allFaqs %}
+    <details class="faq__item"{% if loop.first %} open{% endif %}>
+      <summary>{{ f.q }}</summary>
+      <div class="faq__answer">{{ f.a | md | safe }}</div>
+    </details>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}

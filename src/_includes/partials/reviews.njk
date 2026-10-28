@@ -1,0 +1,24 @@
+{#- Customer reviews — only shows once reviews are added in the CMS (Reviews). -#}
+{% from "partials/icons.njk" import icon %}
+{%- if reviews and reviews.length %}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}Reviews</p>
+      <h2>What Our Customers Say</h2>
+    </div>
+    <ul class="review-grid">
+      {%- for r in reviews %}
+      <li class="review-card">
+        <p class="review-card__stars" aria-label="{{ r.rating or 5 }} out of 5 stars">{% for i in range(0, r.rating or 5) %}{{ icon("star") }}{% endfor %}</p>
+        <blockquote>{{ r.text }}</blockquote>
+        <p class="review-card__who"><strong>{{ r.name }}</strong>{% if r.city %} · {{ r.city }}, MO{% endif %}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- if site.googleReviewUrl %}
+    <p class="section-foot"><a class="btn btn--ghost" href="{{ site.googleReviewUrl }}" rel="noopener" target="_blank">Read more reviews on Google</a></p>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}

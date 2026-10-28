@@ -1,0 +1,78 @@
+---
+layout: layouts/base.njk
+---
+{% from "partials/icons.njk" import icon %}
+{%- set heroTitle = headline -%}
+{%- set heroIntro = intro -%}
+{%- set heroEyebrow = eyebrow -%}
+{% include "partials/page-hero.njk" %}
+
+<section class="section">
+  <div class="container content-grid">
+    <div class="prose">
+      {{ content | safe }}
+
+      {%- for block in features %}
+      <div class="feature-block">
+        <h2>{{ block.title }}</h2>
+        {%- if block.text %}<p>{{ block.text }}</p>{% endif %}
+        <ul class="checklist checklist--cols">
+          {%- for item in block.items %}<li>{{ icon("check") }}{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+    {% include "partials/call-card.njk" %}
+  </div>
+</section>
+
+{%- if plans and plans.length %}
+<section class="section section--panel">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}Service Plans</p>
+      <h2>{{ plansTitle or "Year-Round Protection Plans" }}</h2>
+      {%- if plansIntro %}<p>{{ plansIntro }}</p>{% endif %}
+    </div>
+    <ul class="plan-grid">
+      {%- for plan in plans %}
+      <li class="plan-card{% if plan.featured %} plan-card--featured reticle{% endif %}">
+        {%- if plan.featured %}<p class="plan-card__flag">Most Popular</p>{% endif %}
+        <h3 class="plan-card__name">{{ plan.name }}</h3>
+        <p class="plan-card__price">{% if plan.price %}{{ plan.price }}{% else %}Call for pricing{% endif %}</p>
+        <p class="plan-card__text">{{ plan.text }}</p>
+        <ul class="checklist">
+          {%- for f in plan.features %}<li>{{ icon("check") }}{{ f }}</li>{% endfor %}
+        </ul>
+        <a class="btn {{ 'btn--gold' if plan.featured else 'btn--ghost' }} btn--block" href="/contact/">Get Started</a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+{%- if showServices %}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ icon("crosshair") }}Services</p>
+      <h2>{{ servicesTitle or "Pests We Treat" }}</h2>
+    </div>
+    {% include "partials/service-cards.njk" %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if showWhy %}{% include "partials/why-grid.njk" %}{% endif %}
+
+{%- if allFaqs and allFaqs.length %}
+<section class="section">
+  <div class="container container--narrow">
+    {% include "partials/faq.njk" %}
+  </div>
+</section>
+{%- endif %}
+
+{%- set ctaTitle = cta.title if cta else null %}{% set ctaText = cta.text if cta else null %}
+{% include "partials/cta-band.njk" %}
