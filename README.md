@@ -36,7 +36,7 @@ Requires Node 20 or newer.
 
 A page is generated for **every service with `cityPages: true` × every city with `featured: true`**. Right now that's 5 services × 5 cities = 25 pages, the set from the original plan. Both flags are toggles in the CMS.
 
-Keep the number modest. Google treats large sets of near-identical "{service} in {city}" pages as doorway spam. Each generated page pulls the city's own `intro` text, so every featured city needs a genuinely local intro. Don't mark all 19 cities as featured.
+Keep the number modest. Google treats large sets of near-identical "{service} in {city}" pages as doorway spam. Each generated page pulls the city's own `intro` text, so every featured city needs a genuinely local intro. Don't mark every city as featured.
 
 ## Launch steps
 
@@ -98,7 +98,7 @@ Then work through [docs/SEO-LAUNCH-CHECKLIST.md](docs/SEO-LAUNCH-CHECKLIST.md).
 ## SEO & AI-search features built in
 
 - A unique `<title>` and meta description on every page. Service pages target the region, and service + city pages target "{service} {city} MO".
-- JSON-LD: `LocalBusiness` (name, phone, address, hours, all 19 service cities, service catalog) on every page, plus `Service`, `BreadcrumbList`, and `FAQPage` where relevant.
+- JSON-LD: `LocalBusiness` (name, phone, address, hours, every service city, service catalog) on every page, plus `Service`, `BreadcrumbList`, and `FAQPage` where relevant.
 - `sitemap.xml`, canonical URLs, Open Graph/Twitter cards with a branded share image.
 - `robots.txt` explicitly allows AI search crawlers (OAI-SearchBot/ChatGPT, Claude, Perplexity, Google-Extended, Applebot, Bing). To opt out of AI *training* while staying in AI *search*, remove `GPTBot`, `ClaudeBot`, `Google-Extended`, and `Applebot-Extended` from that list.
 - `/llms.txt`: a plain-text summary of the business for AI assistants, generated from the same data.

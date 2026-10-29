@@ -13,7 +13,7 @@ The site already covers the technical side: titles, schema, sitemap, `llms.txt`,
 
 Use the exact same name, phone, and city everywhere: **Brant's Termite & Pest Control · 660-909-7284 · Warrensburg, MO** · `https://www.brantstermiteandpest.com`
 
-- [ ] **Google Business Profile**: set the website to `https://www.brantstermiteandpest.com`. Primary category **Pest Control Service**. Secondary categories **Termite Control Service**, **Exterminator**, **Animal Control Service**. Add all 19 cities as service areas. Then paste the profile's share link into the CMS under **Business Info → Google Business Profile link**, and the "ask for reviews" link into **Google review link**.
+- [ ] **Google Business Profile**: set the website to `https://www.brantstermiteandpest.com`. Primary category **Pest Control Service**. Secondary categories **Termite Control Service**, **Exterminator**, **Animal Control Service**. Add every city from the website's Service Areas page as a service area. Then paste the profile's share link into the CMS under **Business Info → Google Business Profile link**, and the "ask for reviews" link into **Google review link**.
 - [ ] **Bing Places** (<https://www.bingplaces.com>): import from Google Business Profile. This feeds Copilot and ChatGPT local answers.
 - [ ] **Apple Business Connect** (<https://businessconnect.apple.com>): claim the listing. This feeds Apple Maps and Siri.
 - [ ] **Facebook page**: set the website URL, then add the page link in the CMS (**Business Info → Facebook page link**).

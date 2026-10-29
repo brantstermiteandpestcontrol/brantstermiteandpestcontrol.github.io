@@ -4,7 +4,7 @@ title: About Us
 navTitle: About
 eyebrow: Locally Owned & Operated
 headline: About Brant's Termite & Pest Control
-intro: A local Warrensburg pest control company built on one simple idea — target the pests, defend the property, and treat every customer right.
+intro: A local Warrensburg pest control company built on one simple idea — protect the property, eliminate the pests, and treat every customer right.
 seoTitle: About Brant's Termite & Pest Control | Warrensburg, MO
 metaDescription: Locally owned, licensed and insured pest control in Warrensburg, MO — serving Central Missouri and the Kansas City area. Meet owner Tyler Brant.
 features:
@@ -28,7 +28,7 @@ When you call Brant's, you're working directly with the owner. We take the time 
 
 ## Our Mission
 
-**Targeting pests. Defending your property.** Our goal is simple: eliminate the pests you have today and keep them from coming back tomorrow, with professional, dependable service from people who live and work in the same communities we serve.
+**Protecting properties. Eliminating pests.** Our goal is simple: eliminate the pests you have today and keep them from coming back tomorrow, with professional, dependable service from people who live and work in the same communities we serve.
 
 ## Residential & Commercial
 
