@@ -1,0 +1,25 @@
+{
+  "brants-logo": {
+    "width": 3105,
+    "height": 1149,
+    "ratio": 2.7023,
+    "widths": [
+      480,
+      720,
+      960,
+      1200
+    ],
+    "fallback": 720
+  },
+  "brants-wordmark": {
+    "width": 2901,
+    "height": 1022,
+    "ratio": 2.8386,
+    "widths": [
+      180,
+      360,
+      540
+    ],
+    "fallback": 360
+  }
+}

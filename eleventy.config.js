@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import markdownIt from "markdown-it";
 
 const md = markdownIt({ html: true, linkify: false, typographer: true });
@@ -12,6 +13,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/img/favicon-32.png": "favicon.png" });
 
   eleventyConfig.addGlobalData("year", () => new Date().getFullYear());
+
+  // Logo sizes (generated from "Brant's Main Logo.pdf"); a Nunjucks global so the logo() macro can read it.
+  eleventyConfig.addNunjucksGlobal("logos", JSON.parse(fs.readFileSync("src/_data/logos.json", "utf8")));
 
   // ---- Collections -------------------------------------------------------
   eleventyConfig.addCollection("services", (api) =>

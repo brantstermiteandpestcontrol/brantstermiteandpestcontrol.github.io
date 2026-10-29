@@ -1,0 +1,11 @@
+{#- Responsive logo images from src/_data/logos.json (generated from "Brant's Main Logo.pdf").
+    Usage: {% from "partials/logo.njk" import logo %} {{ logo("brants-wordmark", "165px", "Brant's Termite & Pest Control", "brand__logo") }} -#}
+{% macro logo(name, sizes, alt, cls="", priority=false) -%}
+{%- set L = logos[name] -%}
+{%- set base = "/assets/img/logo/" ~ name -%}
+<picture>
+  <source type="image/avif" srcset="{% for w in L.widths %}{{ base }}-{{ w }}.avif {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="{{ sizes }}">
+  <source type="image/webp" srcset="{% for w in L.widths %}{{ base }}-{{ w }}.webp {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="{{ sizes }}">
+  <img class="{{ cls }}" src="{{ base }}-{{ L.fallback }}.png" width="{{ L.fallback }}" height="{{ (L.fallback / L.ratio) | round }}" alt="{{ alt }}"{% if priority %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+</picture>
+{%- endmacro %}

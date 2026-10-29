@@ -3,6 +3,7 @@ layout: layouts/base.njk
 bodyClass: is-home
 ---
 {% from "partials/icons.njk" import icon %}
+{% from "partials/logo.njk" import logo %}
 {%- set defaultPhoto = "/assets/img/tyler-spraying-800.jpg" -%}
 
 <section class="hero">
@@ -26,22 +27,9 @@ bodyClass: is-home
       </ul>
     </div>
 
-    <div class="hero__media">
+    <div class="hero__media hero__media--logo">
       <div class="hero__rings" aria-hidden="true"></div>
-      <div class="reticle hero__photo">
-        {%- if not hero.image or hero.image == defaultPhoto %}
-        <picture>
-          <source type="image/webp" srcset="/assets/img/tyler-spraying-480.webp 480w, /assets/img/tyler-spraying-800.webp 800w" sizes="(min-width: 960px) 440px, 90vw">
-          <img src="/assets/img/tyler-spraying-800.jpg" srcset="/assets/img/tyler-spraying-480.jpg 480w, /assets/img/tyler-spraying-800.jpg 800w" sizes="(min-width: 960px) 440px, 90vw" width="800" height="1000" alt="{{ hero.imageAlt or (site.owner ~ ' spraying a pest treatment around a home') }}" fetchpriority="high">
-        </picture>
-        {%- else %}
-        <img src="{{ hero.image }}" width="800" height="1000" alt="{{ hero.imageAlt }}" fetchpriority="high">
-        {%- endif %}
-        <p class="hero__tag">
-          <img src="/assets/img/mark-white.png" alt="" width="34" height="34">
-          <span><strong>{{ site.owner }}</strong>{{ site.ownerTitle }}</span>
-        </p>
-      </div>
+      {{ logo("brants-logo", "(min-width: 960px) 600px, 92vw", site.name ~ " logo — Protecting Properties. Eliminating Pests.", "hero__logo", true) }}
     </div>
   </div>
   <div class="container">
@@ -100,14 +88,34 @@ bodyClass: is-home
 </section>
 
 <section class="section section--panel">
-  <div class="container about-home">
-    <div class="about-home__copy">
-      <p class="eyebrow">{{ icon("crosshair") }}About Us</p>
-      <h2>{{ about.title }}</h2>
-      {{ about.text | md | safe }}
-      <a class="btn btn--ghost" href="/about/">Meet {{ site.owner }} {{ icon("arrow") }}</a>
+  <div class="container">
+    <div class="about-home">
+      <div class="about-home__media">
+        <div class="reticle about-home__photo">
+          {%- if not about.image or about.image == defaultPhoto %}
+          <picture>
+            <source type="image/webp" srcset="/assets/img/tyler-spraying-480.webp 480w, /assets/img/tyler-spraying-800.webp 800w" sizes="(min-width: 980px) 420px, 90vw">
+            <img src="/assets/img/tyler-spraying-800.jpg" srcset="/assets/img/tyler-spraying-480.jpg 480w, /assets/img/tyler-spraying-800.jpg 800w" sizes="(min-width: 980px) 420px, 90vw" width="800" height="1000" alt="{{ about.imageAlt or (site.owner ~ ' spraying a pest treatment around a home') }}" loading="lazy" decoding="async">
+          </picture>
+          {%- else %}
+          <img src="{{ about.image }}" width="800" height="1000" alt="{{ about.imageAlt }}" loading="lazy" decoding="async">
+          {%- endif %}
+          <p class="photo-tag">
+            <img src="/assets/img/mark-white.png" alt="" width="34" height="34">
+            <span><strong>{{ site.owner }}</strong>{{ site.ownerTitle }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="about-home__copy">
+        <p class="eyebrow">{{ icon("crosshair") }}About Us</p>
+        <h2>{{ about.title }}</h2>
+        {{ about.text | md | safe }}
+        <a class="btn btn--ghost" href="/about/">Meet {{ site.owner }} {{ icon("arrow") }}</a>
+      </div>
     </div>
-    {% include "partials/process.njk" %}
+    <div class="about-home__process">
+      {% include "partials/process.njk" %}
+    </div>
   </div>
 </section>
 

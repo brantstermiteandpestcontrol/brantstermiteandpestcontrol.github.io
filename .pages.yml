@@ -75,8 +75,6 @@ content:
               - { name: headlineAccent, label: Headline (blue), type: string }
               - { name: subheadline, label: Subheadline, type: text }
               - { name: intro, label: Intro paragraph, type: text }
-              - { name: image, label: Photo, type: image, description: "Tall (portrait) photos work best." }
-              - { name: imageAlt, label: Photo description (for Google & screen readers), type: string }
           - name: services
             label: Services section
             type: object
@@ -111,6 +109,8 @@ content:
             type: object
             fields:
               - { name: title, label: Title, type: string }
+              - { name: image, label: Photo, type: image, description: "Tall (portrait) photos work best." }
+              - { name: imageAlt, label: Photo description (for Google & screen readers), type: string }
               - { name: text, label: Text, type: rich-text, options: { format: markdown, media: false } }
           - name: cta
             label: Bottom call-to-action
