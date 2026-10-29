@@ -9,6 +9,8 @@ hero:
   headlineAccent: Eliminating Pests.
   subheadline: Professional pest control for residential and commercial properties across Central Missouri and the Kansas City area.
   intro: Brant's Termite & Pest Control provides reliable, professional pest control for homes, businesses, and properties of all sizes. From termites and bed bugs to mosquitoes, ants, roaches, spiders, wasps, snakes, and wildlife — we protect your property and keep pests from coming back.
+  image: /assets/img/tyler-spraying-800.jpg
+  imageAlt: Tyler Brant spraying a pest treatment along the outside of a home
 services:
   title: Our Pest Control Services
   text: Complete pest control solutions for homes and businesses — one local company for every pest problem on your property.
@@ -36,8 +38,6 @@ areas:
   note: Residential and commercial pest control services are available throughout all listed areas. Don't see your town? Call — we may still be able to help.
 about:
   title: Local Service You Can Count On
-  image: /assets/img/tyler-spraying-800.jpg
-  imageAlt: Tyler Brant spraying a pest treatment along the outside of a home
   text: |-
     At Brant's Termite & Pest Control, we believe pest control should be professional, reliable, and built around protecting your property. As a locally owned and operated company, you'll work directly with owner Tyler Brant — not a call center.
 

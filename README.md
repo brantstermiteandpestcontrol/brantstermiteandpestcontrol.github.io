@@ -30,19 +30,16 @@ Requires Node 20 or newer.
 | `src/_data/eleventyComputed.js` | Per-page SEO: titles, descriptions, breadcrumbs, FAQ and Service schema. |
 | `src/_includes/` | Layouts and partials. `partials/icons.njk` holds the inline SVG icon set. |
 | `src/assets/` | CSS, JS, self-hosted fonts, images. |
-| `src/assets/img/logo/`, `src/_data/logos.json` | The main logo in several sizes (AVIF, WebP, PNG fallback) and their dimensions. See "Logo files" below. |
+| `src/assets/img/logo/`, `src/_data/logos.json` | Brant's main logo in several sizes (AVIF, WebP, PNG fallback) and its dimensions. See "Logo files" below. |
 | `src/robots.njk`, `sitemap.njk`, `llms.11ty.js` | `robots.txt`, `sitemap.xml`, `llms.txt`. |
 
 ### Logo files
 
-The site's logo images are exported from **"Brant's Main Logo.pdf"**, the designer's print file for the trailer decal. The original `.pdf`, `.ai`, `.eps` and `.dxf` files are 0.1–1.2 GB each, so they aren't in this repo. Keep them somewhere safe; Brant and Tyler Banks both have copies.
+Brant's main logo comes from **"Brant's Main Logo.pdf"**, the designer's print file for his trailer decal. **Use it as-is, never cropped or edited.** The web versions are the complete logo, only resized: on the home page under the top photo, as the link-preview image (`og-image.jpg`), and as the logo in Google's structured data.
 
-- `brants-logo-*`: the top half of the decal (lettering, termite, mosquito, rat, tagline), used on the home page.
-- `brants-wordmark-*`: the same lettering without the pests or tagline, for the header and footer. It was made by leaving the three large pest photos out when rendering the PDF.
-- `og-image.jpg`: the whole decal, used as the link-preview image.
-- The crosshair-ant badge (`mark*.png`, favicons) is Brant's secondary mark. It's used where a small square icon is needed.
+The original `.pdf`, `.ai`, `.eps` and `.dxf` files are 0.1–1.2 GB each, so they aren't in this repo. Keep them somewhere safe; Brant and Tyler Banks both have copies. To make new sizes, render the PDF with transparency (e.g. PyMuPDF `page.get_pixmap(alpha=True)`), trim the empty edges, and resize to the widths in `logos.json`.
 
-To re-export (for example, at new sizes): render the PDF at 3200 px wide with transparency (PyMuPDF `page.get_pixmap(alpha=True)`), crop the top 1149 rows for the logo, and crop the top 1022 rows of a render with images 80, 103 and 105 removed for the wordmark. Then resize to the widths listed in `logos.json`.
+The menu bar, footer and favicons use the crosshair-ant badge from his business cards and truck door.
 
 ### Service + city pages
 

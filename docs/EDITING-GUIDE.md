@@ -42,8 +42,8 @@ You can't break the design from the editor. If something goes wrong, every chang
 ### Add a customer review
 **Shared sections → Customer reviews → Add item.** Use real reviews from Google, and ask the customer first. The reviews section appears on the home page once you add the first one.
 
-### Change your photo on the home page
-**Pages → Home page → About section → Photo.** Upload a new photo. Tall (portrait) photos of you on the job work best. Fill in **Photo description** too, for example "Tyler Brant treating a home for termites in Sedalia".
+### Change the main photo
+**Pages → Home page → Top banner → Photo.** Upload a new photo. Tall (portrait) photos of you on the job work best. Fill in **Photo description** too, for example "Tyler Brant treating a home for termites in Sedalia".
 
 ### Quote form emails
 Quote requests are emailed to the address set up with Web3Forms. To change which inbox gets them, ask Tyler Banks to set up a new key.

@@ -1,9 +1,8 @@
 {% from "partials/icons.njk" import icon %}
-{% from "partials/logo.njk" import logo %}
 <footer class="site-footer">
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
-      {{ logo("brants-wordmark", "230px", site.name ~ " logo", "site-footer__logo") }}
+      <img src="/assets/img/logo-full.png" alt="{{ site.name }} logo" width="180" height="215" loading="lazy">
       <p class="site-footer__tagline">{{ site.tagline }}</p>
     </div>
 

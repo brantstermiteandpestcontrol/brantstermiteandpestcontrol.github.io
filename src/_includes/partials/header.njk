@@ -1,5 +1,4 @@
 {% from "partials/icons.njk" import icon %}
-{% from "partials/logo.njk" import logo %}
 {%- set featuredAreas = collections.areas | featuredOnly -%}
 <div class="topbar">
   <div class="container topbar__inner">
@@ -13,7 +12,11 @@
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <a class="brand" href="/" aria-label="{{ site.name }} — home">
-      {{ logo("brants-wordmark", "(max-width: 560px) 136px, 168px", site.name, "brand__logo", true) }}
+      <img class="brand__mark" src="/assets/img/mark.png" alt="" width="52" height="52">
+      <span class="brand__text">
+        <img class="brand__word" src="/assets/img/wordmark.png" alt="Brant's" width="141" height="22">
+        <span class="brand__sub">Termite &amp; Pest Control</span>
+      </span>
     </a>
 
     <nav class="nav" aria-label="Main" data-nav>
