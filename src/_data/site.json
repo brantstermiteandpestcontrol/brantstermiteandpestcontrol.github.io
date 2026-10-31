@@ -5,8 +5,6 @@
   "owner": "Tyler Brant",
   "ownerTitle": "Owner / Operator",
   "phone": "660-909-7284",
-  "email": "",
-  "url": "https://www.brantstermiteandpest.com",
   "region": "Central Missouri",
   "address": {
     "street": "25 SW 675th Rd",
@@ -31,12 +29,12 @@
     "Locally Owned & Operated",
     "Residential & Commercial"
   ],
-  "googleProfileUrl": "",
-  "googleReviewUrl": "",
-  "facebookUrl": "",
+  "googleProfileUrl": "https://maps.app.goo.gl/EtE6EU8oWrARqzRE6",
+  "googleReviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x87c1558968f58659:0x897e4401ce24a302!12e1",
+  "facebookUrl": "https://www.facebook.com/p/Brants-Termite-Pest-Control-LLC-100089833644741/",
   "quoteForm": {
-    "web3formsKey": "",
     "subject": "New quote request — brantstermiteandpest.com"
   },
+  "url": "https://www.brantstermiteandpest.com",
   "indexNowKey": "70e5c70bc748f2816100d8fde48b38dc"
 }
